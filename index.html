@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oxygen</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.51.0/min/vs/editor/editor.main.min.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    
+    <div class="title-bar">
+      <div class="title-bar-drag">
+        <span class="app-title">Oxygen</span>
+      </div>
+    </div>
+
+    
+    <div class="main-content">
+      
+      <div class="sidebar-icons">
+        <div class="icon-btn active" data-tab="scripts" title="Scripts">
+          <i class='bx bx-code-alt'></i>
+        </div>
+        <div class="icon-btn" data-tab="console" title="Console">
+          <i class='bx bx-terminal'></i>
+        </div>
+        <div class="icon-btn" data-tab="scripthub" title="Script Hub">
+          <i class='bx bx-book'></i>
+        </div>
+        <div class="icon-btn" data-tab="autoexec" title="Auto Execute">
+          <i class='bx bxs-bolt'></i>
+        </div>
+        <div class="spacer"></div>
+        <div class="icon-btn" data-tab="settings" title="Settings">
+          <i class='bx bx-cog'></i>
+        </div>
+      </div>
+
+      
+      <div class="main-panel">
+        
+        <div class="tab-content active" id="tab-scripts">
+          <div class="scripts-layout">
+            
+            <div class="file-sidebar">
+              <div class="file-sidebar-header">
+                <span>Files</span>
+                <div class="file-actions">
+                  <button class="file-action-btn" id="new-file-btn" title="New File">
+                    <i class='bx bx-file-blank'></i>
+                  </button>
+                  <button class="file-action-btn" id="new-folder-btn" title="New Folder">
+                    <i class='bx bx-folder-plus'></i>
+                  </button>
+                </div>
+              </div>
+              <div class="file-tree" id="file-tree"></div>
+            </div>
+
+            
+            <div class="editor-section">
+              
+              <div class="tabs-bar">
+                <div class="tabs-container" id="tabs-container"></div>
+                <button class="add-tab-btn" id="add-tab-btn" title="New Tab">
+                  <i class='bx bx-plus'></i>
+                </button>
+              </div>
+
+              
+              <div class="editor-container" id="editor-container"></div>
+
+              
+              <div class="bottom-bar">
+                <div class="status-area">
+                  <div class="executor-selector">
+                    <select id="executor-select">
+                      <option value="MacSploit">MacSploit</option>
+                      <option value="Opiumware">Opiumware</option>
+                      <option value="Hydrogen">Hydrogen</option>
+                    </select>
+                    <select id="port-selector"></select>
+                  </div>
+                  <div class="connection-indicator">
+                    <div class="status-dot" id="status-dot"></div>
+                    <span class="status-text" id="status-text">Disconnected</span>
+                  </div>
+                </div>
+                <div class="action-buttons">
+                  <button class="action-btn" id="open-roblox-btn" title="Open Roblox">
+                    <svg viewBox="0 0 256 256" fill="currentColor" width="18" height="18">
+                      <path d="M65.4 15.6L15.6 201.7l186.2 49.9 49.7-186.2L65.4 15.6zm49.2 85.5l51.9 13.9-13.9 52-52-14 14-51.9z"/>
+                    </svg>
+                    <span>Open Roblox</span>
+                  </button>
+                  <button class="action-btn primary" id="execute-btn" title="Execute (Cmd+Enter)">
+                    <i class='bx bx-play'></i>
+                    <span>Execute</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="tab-content" id="tab-console">
+          <div class="console-panel">
+            <div class="panel-header">
+              <span>Roblox Console</span>
+              <div class="console-stats">
+                <span class="stat-badge stat-error" id="stat-errors"><i class='bx bx-error-circle'></i> 0</span>
+                <span class="stat-badge stat-warning" id="stat-warnings"><i class='bx bx-error'></i> 0</span>
+                <span class="stat-badge stat-info" id="stat-info"><i class='bx bx-info-circle'></i> 0</span>
+              </div>
+              <div class="console-header-actions">
+                <button class="console-btn" id="clear-console">Clear</button>
+                <button class="console-btn" id="copy-console">Copy</button>
+              </div>
+            </div>
+            <div class="console-output" id="console-output"></div>
+            <div class="console-input-bar">
+              <input type="text" id="console-input" placeholder="Enter script and press Enter to execute...">
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="tab-content" id="tab-scripthub">
+          <div class="scripthub-container">
+            <div class="scripthub-header">
+              <input type="text" id="scripthub-search" placeholder="Search Script Hub...">
+            </div>
+            <div class="scripthub-grid" id="scripthub-results">
+              <div class="scripthub-placeholder">Search for scripts to get started</div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="tab-content" id="tab-autoexec">
+          <div class="autoexec-panel">
+            <div class="panel-header">
+              <span>Auto Execute Scripts</span>
+              <span class="autoexec-hint">Right-click scripts in Files to add here</span>
+            </div>
+            <div class="autoexec-list" id="autoexec-list">
+              <div class="autoexec-placeholder">No auto-execute scripts</div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="tab-content" id="tab-settings">
+          <div class="settings-panel">
+            <div class="settings-section">
+              <div class="settings-section-title">Appearance</div>
+              
+              <div class="settings-row">
+                <div class="settings-row-info">
+                  <div class="settings-label">Accent Color</div>
+                  <div class="settings-desc">Customize the UI accent color</div>
+                </div>
+                <div class="settings-control">
+                  <input type="color" id="accent-color-picker" value="#6366f1" class="color-picker">
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-title">Window</div>
+              
+              <div class="settings-row">
+                <div class="settings-row-info">
+                  <div class="settings-label">Always on Top</div>
+                  <div class="settings-desc">Keep Oxygen above other windows</div>
+                </div>
+                <div class="settings-control">
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="always-on-top">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+              
+              <div class="settings-row">
+                <div class="settings-row-info">
+                  <div class="settings-label">Launch on Startup</div>
+                  <div class="settings-desc">Open Oxygen when your Mac starts</div>
+                </div>
+                <div class="settings-control">
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="launch-on-startup" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-title">Storage</div>
+              
+              <div class="settings-row">
+                <div class="settings-row-info">
+                  <div class="settings-label">Scripts Folder</div>
+                  <div class="settings-desc" id="scripts-path">~/Oxygen/Scripts</div>
+                </div>
+                <button class="settings-btn" id="open-scripts-folder">Open</button>
+              </div>
+              
+              <div class="settings-row">
+                <div class="settings-row-info">
+                  <div class="settings-label">Auto-Execute Folder</div>
+                  <div class="settings-desc" id="autoexec-path">~/Oxygen/AutoExec</div>
+                </div>
+                <button class="settings-btn" id="open-autoexec-folder">Open</button>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-title">About</div>
+              
+              <div class="settings-row">
+                <div class="settings-row-info">
+                  <div class="settings-label">Version</div>
+                  <div class="settings-desc">Oxygen v1.0.0</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-reset">
+              <button class="reset-btn" id="reset-settings">Reset to Defaults</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="context-menu" id="context-menu"></div>
+
+  
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-title" id="modal-title">Enter name</div>
+      <input type="text" class="modal-input" id="modal-input" placeholder="Name...">
+      <div class="modal-buttons">
+        <button class="modal-btn" id="modal-cancel">Cancel</button>
+        <button class="modal-btn primary" id="modal-ok">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    
+    window.nodeRequire = window.require;
+    window.nodeModule = window.module;
+    window.nodeProcess = window.process;
+    
+    
+    window.require = undefined;
+    window.module = undefined;
+    window.process = undefined;
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.51.0/min/vs/loader.min.js"></script>
+  <script>
+    
+    window.amdRequire = window.require;
+    window.amdDefine = window.define;
+    
+    
+    (function() {
+      const base = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.51.0/min/';
+      window.MonacoEnvironment = {
+        getWorker: function() {
+          
+          const workerSrc = 'data:text/javascript;charset=utf-8,' +
+            encodeURIComponent('self.onmessage = function() {};');
+          return new Worker(workerSrc, { type: 'classic' });
+        }
+      };
+      if (window.amdRequire && window.amdRequire.config) {
+        window.amdRequire.config({ paths: { vs: base + 'vs' } });
+      }
+    })();
+    
+    
+    window.require = window.nodeRequire;
+    window.module = window.nodeModule;
+    window.process = window.nodeProcess;
+  </script>
+  <script src="renderer.js"></script>
+</body>
+</html>

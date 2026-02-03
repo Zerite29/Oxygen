@@ -1,0 +1,34 @@
+{
+  "name": "oxygen-ui",
+  "version": "1.0.0",
+  "description": "Oxygen UI",
+  "main": "main.js",
+  "icon": "./icon.png",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "keywords": [
+    "electron",
+    "roblox",
+    "executor"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^5.0.0",
+    "monaco-editor": "^0.45.0",
+    "node-fetch": "^2.7.0"
+  },
+  "files": [
+    "main.js",
+    "renderer.js",
+    "index.html",
+    "style.css",
+    "icon.png",
+    "package.json"
+  ]
+}
