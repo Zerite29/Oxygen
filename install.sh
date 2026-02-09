@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-APP_NAME="Oxygen"
+APP_NAME="oxygen-ui"
 INSTALL_DIR="/Applications"
 TMP_DIR="$(mktemp -d)"
 GITHUB_REPO="Zerite29/Oxygen"
